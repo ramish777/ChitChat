@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = "6247APRgx+O8L68xa4VLjyqLS84ZAT03kSm+ldnpMWY="; // Replace "your_jwt_secret_key" with your actual JWT secret key
+const JWT_SECRET = "6247APRgx+O8L68xa4VLjyqLS84ZAT03kSm+ldnpMWY=";
 
 const generateToken = (userId, res) => {
     const token = jwt.sign({ userId }, JWT_SECRET, {
@@ -14,4 +14,4 @@ const generateToken = (userId, res) => {
     });
 };
 
-module.exports = generateToken;
+module.exports = { generateToken, JWT_SECRET };

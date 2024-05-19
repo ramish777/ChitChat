@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/user');
 const bcrypt = require("bcryptjs");
-const generateToken = require("../utils/jwtToken.js");
+const { generateToken } = require("../utils/jwtToken.js");
 
 router.route('/signup').post(async (req, res) => {
     const { username, password, confirmPassword, fullName, gender } = req.body;
@@ -30,9 +30,9 @@ router.route('/signup').post(async (req, res) => {
             });
             
             if(newUser){
-                await newUser.save();
-
                 generateToken(newUser._id, res);
+
+                await newUser.save();
     
                 return res.json('User added!');
             }

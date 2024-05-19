@@ -24,7 +24,7 @@ const userSchema = new Schema({
         type: String,
         default:"",
     },
-  });
+  },{timestap:true});
   
   const User = mongoose.model('User', userSchema);
   
