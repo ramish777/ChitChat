@@ -5,17 +5,19 @@ const { generateToken } = require("../utils/jwtToken.js");
 
 router.route('/signup').post(async (req, res) => {
     const { username, password, confirmPassword, fullName, gender } = req.body;
+    console.log(req.body);
 
     const boyDp = `https://avatar.iran.liara.run/public/boy?username=${username}`;
     const girlDp = `https://avatar.iran.liara.run/public/girl?username=${username}`;
 
     if (password === confirmPassword) {
         try {
+
             const existingUser = await User.findOne({ username });
             if (existingUser) {
                 return res.status(400).json({ error: "Username already exists" });
             }
-
+            
             // //hash password using bcrypt
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
@@ -34,7 +36,12 @@ router.route('/signup').post(async (req, res) => {
 
                 await newUser.save();
     
-                return res.json('User added!');
+                res.status(201).json({
+                    _id: newUser._id,
+                    fullName: newUser.fullName,
+                    username: newUser.username,
+                    profilePic: newUser.profilePic,
+                });
             }
         } catch (err) {
             return res.status(400).json({ error: "Error occurred while signing up" });

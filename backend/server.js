@@ -2,9 +2,11 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
 const mongoose = require('mongoose');
+const cors= require('cors');
 
 const port = process.env.PORT || 5000;
 
+app.use(cors());
 app.use(express.json()); //for getting data from req.body
 app.use(cookieParser());
 
