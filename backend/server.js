@@ -6,7 +6,10 @@ const cors= require('cors');
 
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Specify the allowed origin
+  credentials: true, // Allow credentials (cookies) to be sent
+}));
 app.use(express.json()); //for getting data from req.body
 app.use(cookieParser());
 

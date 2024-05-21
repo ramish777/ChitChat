@@ -1,5 +1,6 @@
 import Conversations from "./Conversations";
 import SearchBar from "./SearchBar";
+import LogoutButton from "./Logout";
 
 const Sidebar = () => {
 	return (
@@ -7,7 +8,7 @@ const Sidebar = () => {
 			<SearchBar />
 			<div className='divider px-3'></div>
 			<Conversations />
-			{/* <LogoutButton /> */}
+			<LogoutButton />
 		</div>
 	);
 };

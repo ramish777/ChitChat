@@ -1,16 +1,23 @@
 import MsgInput from "./MsgInput";
 import Messages from "./Messages";
 import { TiMessages } from "react-icons/ti";
+import {useConversationContext} from "../../Context/ConversationContext";
+import { useEffect } from "react";
 
 const MessageContainer = () => {
-    let selectedConversation=true;
+	const {selectedConversation,setSelectedConversation}=useConversationContext()
+
+	useEffect(() => {
+		// cleanup function (unmounts)
+		return () => setSelectedConversation(null);
+	}, [setSelectedConversation]);
 
 	return (
 		<div className='md:min-w-[450px] flex flex-col'>
 			{selectedConversation ? (
                 <>
                     <div className='bg-slate-500 px-4 py-2 mb-2'>
-                        <span className='label-text'>To:</span> <span className='text-gray-900 font-bold'>John Doe</span>
+                        <span className='label-text'>To:</span> <span className='text-gray-900 font-bold'>{selectedConversation.fullName}</span>
                     </div>
                     <Messages />
                     <MsgInput />
